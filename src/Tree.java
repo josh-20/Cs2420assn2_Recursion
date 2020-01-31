@@ -1,4 +1,4 @@
-// ******************ERRORS********************************
+package Cs2420assn2_Recursion.src;// ******************ERRORS********************************
 // Throws UnderflowException as appropriate
 
 import java.util.Random;
@@ -19,7 +19,14 @@ public class Tree<E extends Comparable<? super E>> {
     public Tree(String label) {
         treeName = label;
         root = null;
+        System.out.println("Hello");
+        makeEmpty();
+
+        
     }
+    public void makeEmpty(){ root = null;
+    }
+
 
     /**
      * Create non ordered tree from list in preorder
@@ -42,6 +49,7 @@ public class Tree<E extends Comparable<? super E>> {
         treeName = label;
         for (int i = 0; i < arr.size(); i++) {
             bstInsert(arr.get(i));
+
         }
     }
 
