@@ -1,4 +1,4 @@
-package Cs2420assn2_Recursion.src;// ******************ERRORS********************************
+// ******************ERRORS********************************
 // Throws UnderflowException as appropriate
 
 import java.util.Random;
@@ -19,15 +19,9 @@ public class Tree<E extends Comparable<? super E>> {
     public Tree(String label) {
         treeName = label;
         root = null;
-        System.out.println("Hello");
-        makeEmpty();
 
         
     }
-    public void makeEmpty(){ root = null;
-    }
-
-
     /**
      * Create non ordered tree from list in preorder
      * @param arr    List of elements
@@ -79,10 +73,11 @@ public class Tree<E extends Comparable<? super E>> {
      * Return a string displaying the tree contents as a tree with one node per line
      */
     public String toString() {
+        String index = " ";
         if (root == null)
             return (treeName + " Empty tree\n");
         else
-            return " ";
+            return toString(root, index);
     }
 
     /**
@@ -99,7 +94,8 @@ public class Tree<E extends Comparable<? super E>> {
      * reverse left and right children recursively
      */
     public void flip() {
-        //flip(root);
+        flip();
+
     }
 
     /**
@@ -299,6 +295,34 @@ public class Tree<E extends Comparable<? super E>> {
         sb.append(toString2(t.right));
         return sb.toString();
     }
+    private String toString(BinaryNode<E> t, String index) {
+        String p = "";
+        if (t == null) {
+            return "";
+        }
+        if (t.parent == null){
+          p = "No Parent";
+        }else if ( t.parent != null){
+            p = t.parent.element.toString();
+        }
+        StringBuilder sb = new StringBuilder();
+        sb.append(index + toString(t.right,index));
+        sb.append(t.element.toString() + " ");
+        sb.append("["+ p + "]" + "\n");
+        sb.append(index + toString(t.left,index ));
+        return sb.toString();
+    }
+    private void flip(BinaryNode<E> t){
+        BinaryNode<E> tmpLeft = t.right;
+        BinaryNode<E> tempRight = t.left;
+        if (t == null){
+            return;
+        }
+        t.right = tmpLeft;
+        t.left = tempRight;
+        flip();
+
+    }
 
     // Basic node stored in unbalanced binary  trees
     private static class BinaryNode<AnyType> {
@@ -428,6 +452,7 @@ public class Tree<E extends Comparable<? super E>> {
         tree3.keepRange(3, 85);
         tree3.changeName("tree3 after keeping only nodes between 3  and 85");
         System.out.println(tree3.toString());
+
 
 
     }
