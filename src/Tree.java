@@ -1,6 +1,7 @@
 // ******************ERRORS********************************
 // Throws UnderflowException as appropriate
 
+import javax.naming.spi.StateFactory;
 import java.util.Random;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -94,7 +95,7 @@ public class Tree<E extends Comparable<? super E>> {
      * reverse left and right children recursively
      */
     public void flip() {
-        flip();
+        flip(root);
 
     }
 
@@ -313,14 +314,14 @@ public class Tree<E extends Comparable<? super E>> {
         return sb.toString();
     }
     private void flip(BinaryNode<E> t){
-        BinaryNode<E> tmpLeft = t.right;
-        BinaryNode<E> tempRight = t.left;
+        BinaryNode<E> tmpLeft = t.left;
+        BinaryNode<E> tempRight = t.right;
         if (t == null){
             return;
         }
         t.right = tmpLeft;
         t.left = tempRight;
-        flip();
+        return;
 
     }
 
@@ -397,7 +398,7 @@ public class Tree<E extends Comparable<? super E>> {
         System.out.println(treeA.toString());
 
         treeA.flip();
-        System.out.println("Now flipped" + treeA.toString());
+        System.out.println("Now flipped" +"\n" + treeA.toString());
 
         System.out.println(tree2.toString());
         tree2.contains(val);  //Sets the current node inside the tree6 class.
