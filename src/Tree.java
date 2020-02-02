@@ -1,6 +1,10 @@
 // ******************ERRORS********************************
 // Throws UnderflowException as appropriate
 
+import org.w3c.dom.Node;
+import org.w3c.dom.ls.LSOutput;
+
+import javax.crypto.spec.PSource;
 import javax.naming.spi.StateFactory;
 import java.util.Random;
 import java.util.ArrayList;
@@ -105,7 +109,7 @@ public class Tree<E extends Comparable<? super E>> {
      */
     public String successor() {
         if (curr == null) curr = root;
-        //curr = successor(curr);
+        curr = successor(curr);
         if (curr == null) return "null";
         else return curr.toString();
     }
@@ -322,8 +326,22 @@ public class Tree<E extends Comparable<? super E>> {
         t.right = tmpLeft;
         t.left = tempRight;
         return;
-
     }
+    private Node successor(BinaryNode<E> t){
+        BinaryNode<E> track = t.parent;
+       while(track.element.compareTo(t.element) < 0){
+
+           if (track.element.compareTo(t.element) < 0){
+               track = track.parent;
+           }
+       }
+        return track.element;
+    }
+
+
+
+
+
 
     // Basic node stored in unbalanced binary  trees
     private static class BinaryNode<AnyType> {
