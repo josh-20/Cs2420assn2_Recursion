@@ -328,24 +328,28 @@ public class Tree<E extends Comparable<? super E>> {
         return;
     }
     private BinaryNode<E> successor(BinaryNode<E> t){
+        if (t == null){
+            return null;
+        }
         BinaryNode<E> track = t;
-        if(track.parent != null){
-           while(track != null) {
-               track = track.parent;
-               if (track.element.compareTo(t.element) > 0) {
-                   return track;
-               }
-           }
-       }
-        else if (track.parent == null){
-            while (track != null){
-                track = track.right;
-
+        if (track.right == null){
+            while (track.parent != null){
+                track = track.parent;
+                if(track.element.compareTo(t.element) > 0){
+                    return track;
+                }
             }
         }
-       return track;
-
-
+        else if(track.parent == null) {
+            track = track.right;
+            while (track.left != null) {
+                track = track.left;
+                if (track.element.compareTo(t.element) > 0) {
+                    return track;
+                }
+            }
+        }
+        return track;
     }
 
 
