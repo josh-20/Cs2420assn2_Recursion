@@ -327,15 +327,15 @@ public class Tree<E extends Comparable<? super E>> {
         t.left = tempRight;
         return;
     }
-    private Node successor(BinaryNode<E> t){
-        BinaryNode<E> track = t.parent;
-       while(track.element.compareTo(t.element) < 0){
+    private BinaryNode<E> successor(BinaryNode<E> t){
+        BinaryNode<E> track = t;
+       while(track != null){
 
            if (track.element.compareTo(t.element) < 0){
                track = track.parent;
            }
        }
-        return track.element;
+        return track;
     }
 
 
