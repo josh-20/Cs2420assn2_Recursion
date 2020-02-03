@@ -329,18 +329,24 @@ public class Tree<E extends Comparable<? super E>> {
     }
     private BinaryNode<E> successor(BinaryNode<E> t){
         BinaryNode<E> track = t;
-       while(track != null){
-
-           if (track.element.compareTo(t.element) < 0){
+        if(track.parent != null){
+           while(track != null) {
                track = track.parent;
+               if (track.element.compareTo(t.element) > 0) {
+                   return track;
+               }
            }
        }
-        return track;
+        else if (track.parent == null){
+            while (track != null){
+                track = track.right;
+
+            }
+        }
+       return track;
+
+
     }
-
-
-
-
 
 
     // Basic node stored in unbalanced binary  trees
