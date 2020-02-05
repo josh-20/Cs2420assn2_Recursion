@@ -116,11 +116,17 @@ public class Tree<E extends Comparable<? super E>> {
 
     /**
      * Counts number of nodes in specifed level
+     *
+     * @param root
      * @param level Level in tree, root is zero
      * @return count of number of nodes at specified level
      */
     public int nodesInLevel(int level) {
-        return 0; //nodesInLevel(root, level);
+        int count = 0;
+        int height = 0;
+       NodesInLevel(root,level,height,count);
+        return 0;
+
     }
 
     /**
@@ -307,7 +313,7 @@ public class Tree<E extends Comparable<? super E>> {
         }
         if (t.parent == null){
           p = "No Parent";
-        }else if ( t.parent != null){
+        }else if (t.parent != null){
             p = t.parent.element.toString();
         }
         StringBuilder sb = new StringBuilder();
@@ -328,31 +334,48 @@ public class Tree<E extends Comparable<? super E>> {
         return;
     }
     private BinaryNode<E> successor(BinaryNode<E> t){
-        if (t == null){
+        BinaryNode<E> track = t;
+        if (track.parent == null){
             return null;
         }
-        BinaryNode<E> track = t;
         if (track.right == null){
-            while (track.parent != null){
+            while (track.element != null){
                 track = track.parent;
                 if(track.element.compareTo(t.element) > 0){
                     return track;
                 }
             }
         }
-        else if(track.parent == null) {
+         else if(track.right.element != null) {
             track = track.right;
             while (track.left != null) {
                 track = track.left;
-                if (track.element.compareTo(t.element) > 0) {
-                    return track;
                 }
             }
-        }
-        return track;
+            return track;
     }
+    private int NodesInLevel(BinaryNode<E> start, int level, int numOfNodes, int counter){
+        if (start.element == null) {
+            return 0;
+        }
+        if (counter > level){
+            return 0;
+        }
+        while (counter != level){
+            start = start.right;
+        }
+        if( counter == level){
+             start = start.parent;
+            if (start.left != null){
+                numOfNodes++;
+            }
+            if (start.right != null){
+                numOfNodes++;
+            }
 
-
+        }
+        return numOfNodes;
+    }
     // Basic node stored in unbalanced binary  trees
     private static class BinaryNode<AnyType> {
         AnyType element;            // The data in the node
@@ -481,6 +504,9 @@ public class Tree<E extends Comparable<? super E>> {
         tree3.keepRange(3, 85);
         tree3.changeName("tree3 after keeping only nodes between 3  and 85");
         System.out.println(tree3.toString());
+
+
+
 
 
 
