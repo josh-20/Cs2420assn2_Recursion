@@ -122,8 +122,7 @@ public class Tree<E extends Comparable<? super E>> {
      * @return count of number of nodes at specified level
      */
     public int nodesInLevel(int level) {
-        //NodesInLevel(level,root,root,0,0);
-        return 0;
+        return NodesInLevel(level,root,root,0);
     }
 
     /**
@@ -351,7 +350,24 @@ public class Tree<E extends Comparable<? super E>> {
             }
             return track;
     }
-//    private int NodesInLevel(int level,BinaryNode<E> nodeR, BinaryNode<E> nodeL, int count, int Nodes){
+    private int NodesInLevel(int level,BinaryNode<E> nodeR, BinaryNode<E> nodeL,int nodes){
+    }
+//        if (count > level){
+//            return Nodes;
+//        }
+//        if (level == count){
+//            nodeL = nodeL.parent;
+//            nodeR = nodeR.parent;
+//            if (nodeL.right != null)Nodes++;
+//            if (nodeL.left != null)Nodes++;
+//            if (nodeR.right != null)Nodes++;
+//            if (nodeR.left != null)Nodes++;
+//        }
+//        if(nodeL.left == null && level != count)return NodesInLevel(level, nodeR,nodeL.right,count + 1,Nodes);
+//        if(nodeR.right == null && level != count) return NodesInLevel(level, nodeR.left, nodeL, count + 1,Nodes);
+//        return NodesInLevel(level,nodeR.right,nodeL.left,count + 1,Nodes);
+//
+//    }
 ////        if (nodeL == null && level != count){
 ////            NodesInLevel(level,nodeR,nodeL.right,count++,Nodes);
 ////        }
