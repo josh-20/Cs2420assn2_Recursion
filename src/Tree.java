@@ -122,11 +122,8 @@ public class Tree<E extends Comparable<? super E>> {
      * @return count of number of nodes at specified level
      */
     public int nodesInLevel(int level) {
-        int count = 0;
-        int height = 0;
-       NodesInLevel(root,level,height,count);
+        //NodesInLevel(level,root,root,0,0);
         return 0;
-
     }
 
     /**
@@ -354,28 +351,23 @@ public class Tree<E extends Comparable<? super E>> {
             }
             return track;
     }
-    private int NodesInLevel(BinaryNode<E> start, int level, int numOfNodes, int counter){
-        if (start.element == null) {
-            return 0;
-        }
-        if (counter > level){
-            return 0;
-        }
-        while (counter != level){
-            start = start.right;
-        }
-        if( counter == level){
-             start = start.parent;
-            if (start.left != null){
-                numOfNodes++;
-            }
-            if (start.right != null){
-                numOfNodes++;
-            }
-
-        }
-        return numOfNodes;
-    }
+//    private int NodesInLevel(int level,BinaryNode<E> nodeR, BinaryNode<E> nodeL, int count, int Nodes){
+////        if (nodeL == null && level != count){
+////            NodesInLevel(level,nodeR,nodeL.right,count++,Nodes);
+////        }
+//
+//        NodesInLevel(level,nodeR.right,nodeL.left,count + 1, Nodes);
+//        if (nodeL == null || nodeR == null || nodeL.left == null || nodeL.right == null || nodeR.left == null || nodeR.right == null) return 0;
+//        if (level == count){
+//             nodeL = nodeL.parent;
+//            nodeR = nodeR.parent;
+//            if(nodeR.right != null) Nodes++;
+//            if(nodeR.left != null) Nodes++;
+//            if(nodeL.right != null) Nodes++;
+//            if(nodeL.left != null) Nodes++;
+//       }
+//       return Nodes;
+//    }
     // Basic node stored in unbalanced binary  trees
     private static class BinaryNode<AnyType> {
         AnyType element;            // The data in the node
