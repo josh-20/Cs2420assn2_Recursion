@@ -207,7 +207,9 @@ public class Tree<E extends Comparable<? super E>> {
      * Balance the tree
      */
     public void balanceTree() {
-        balanceTree(root);
+        ArrayList<E> list = new ArrayList<>();
+        int index = 0;
+        balanceTree(root, list, index);
     }
 
     /**
@@ -386,15 +388,16 @@ public class Tree<E extends Comparable<? super E>> {
         int size = list.size();
         list.remove(size -1);
     }
-    private void balanceTree(BinaryNode<E> t){
+    private void balanceTree(BinaryNode<E> t, ArrayList<E> list, int index){
         if(t == null){
             return;
         }
-        StringBuilder sb = new StringBuilder();
-        sb.append(t.toString());
-        balanceTree(t.right);
-        balanceTree(t.left);
-        System.out.println(sb);
+        
+        balanceTree(t.right, list, index);
+        balanceTree(t.left,list, index);
+
+
+
 
     }
     private static class BinaryNode<AnyType> {
