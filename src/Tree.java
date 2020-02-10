@@ -207,7 +207,6 @@ public class Tree<E extends Comparable<? super E>> {
      * Balance the tree
      */
     public void balanceTree() {
-
         balanceTree(root);
     }
 
@@ -391,11 +390,13 @@ public class Tree<E extends Comparable<? super E>> {
         if(t == null){
             return;
         }
+        StringBuilder sb = new StringBuilder();
+        sb.append(t.toString());
         balanceTree(t.right);
         balanceTree(t.left);
+        System.out.println(sb);
 
     }
-
     private static class BinaryNode<AnyType> {
         AnyType element;            // The data in the node
         BinaryNode<AnyType> left;   // Left child
@@ -406,14 +407,12 @@ public class Tree<E extends Comparable<? super E>> {
         BinaryNode(AnyType theElement) {
             this(theElement, null, null, null);
         }
-
         BinaryNode(AnyType theElement, BinaryNode<AnyType> lt, BinaryNode<AnyType> rt, BinaryNode<AnyType> pt) {
             element = theElement;
             left = lt;
             right = rt;
             parent = pt;
         }
-
         public String toString() {
             StringBuilder sb = new StringBuilder();
             sb.append("Node:");
@@ -425,22 +424,16 @@ public class Tree<E extends Comparable<? super E>> {
                 sb.append(parent.element);
                 sb.append(">");
             }
-
             return sb.toString();
         }
-
     }
-
-
     // Test program
     public static void main(String[] args) {
         long seed = 436543;
         Random generator = new Random(seed);  // Don't use a seed if you want the numbers to be different each time
         final String ENDLINE = "\n";
-
         int val = 60;
         final int SIZE = 8;
-
         Integer[] v1 = {25, 10, 60, 55, 58, 56, 14, 63, 8, 50, 6, 9};
         ArrayList<Integer> v2 = new ArrayList<Integer>();
         for (int i = 0; i < SIZE * 2; i++) {
