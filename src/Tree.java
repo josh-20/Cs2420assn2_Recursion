@@ -122,13 +122,15 @@ public class Tree<E extends Comparable<? super E>> {
      * @return count of number of nodes at specified level
      */
     public int nodesInLevel(int level) {
-        return NodesInLevel(level,root,root,0);
+        return 0;
     }
 
     /**
      * Print all paths from root to leaves
      */
     public void printAllPaths() {
+        ArrayList<E> list = new ArrayList<>();
+        printAllPaths(root, list);
 
     }
 
@@ -205,7 +207,8 @@ public class Tree<E extends Comparable<? super E>> {
      * Balance the tree
      */
     public void balanceTree() {
-        //root = balanceTree(root);
+
+        balanceTree(root);
     }
 
     /**
@@ -214,9 +217,23 @@ public class Tree<E extends Comparable<? super E>> {
      * @param b highest value
      */
     public void keepRange(E a, E b) {
+        keepRange(a,b,root);
     }
 
     //PRIVATE
+    private void keepRange(E a, E b, BinaryNode<E> t){
+        if(t ==  null){
+            return;
+        }
+        if (t.element.compareTo(a) > 0 && t.element.compareTo(b) <= 0){
+            if(t.left == null && t.right == null){
+                t = null;
+                t = t.parent;
+            }
+
+        }
+        keepRange(a,b,t.left);
+    }
 
     /**
      * Build a NON BST tree by preorder
@@ -329,6 +346,7 @@ public class Tree<E extends Comparable<? super E>> {
         t.left = tempRight;
         return;
     }
+
     private BinaryNode<E> successor(BinaryNode<E> t){
         BinaryNode<E> track = t;
         if (track.parent == null){
@@ -350,41 +368,34 @@ public class Tree<E extends Comparable<? super E>> {
             }
             return track;
     }
-    private int NodesInLevel(int level,BinaryNode<E> nodeR, BinaryNode<E> nodeL,int nodes){
-    }
-//        if (count > level){
-//            return Nodes;
-//        }
-//        if (level == count){
-//            nodeL = nodeL.parent;
-//            nodeR = nodeR.parent;
-//            if (nodeL.right != null)Nodes++;
-//            if (nodeL.left != null)Nodes++;
-//            if (nodeR.right != null)Nodes++;
-//            if (nodeR.left != null)Nodes++;
-//        }
-//        if(nodeL.left == null && level != count)return NodesInLevel(level, nodeR,nodeL.right,count + 1,Nodes);
-//        if(nodeR.right == null && level != count) return NodesInLevel(level, nodeR.left, nodeL, count + 1,Nodes);
-//        return NodesInLevel(level,nodeR.right,nodeL.left,count + 1,Nodes);
+//    private int NodesInLevel(int level,BinaryNode<E> nodeR, BinaryNode<E> nodeL,int nodes){
 //
 //    }
-////        if (nodeL == null && level != count){
-////            NodesInLevel(level,nodeR,nodeL.right,count++,Nodes);
-////        }
 //
-//        NodesInLevel(level,nodeR.right,nodeL.left,count + 1, Nodes);
-//        if (nodeL == null || nodeR == null || nodeL.left == null || nodeL.right == null || nodeR.left == null || nodeR.right == null) return 0;
-//        if (level == count){
-//             nodeL = nodeL.parent;
-//            nodeR = nodeR.parent;
-//            if(nodeR.right != null) Nodes++;
-//            if(nodeR.left != null) Nodes++;
-//            if(nodeL.right != null) Nodes++;
-//            if(nodeL.left != null) Nodes++;
-//       }
-//       return Nodes;
-//    }
     // Basic node stored in unbalanced binary  trees
+    private void printAllPaths(BinaryNode<E> t, ArrayList<E> list) {
+        if (t == null) {
+            return;
+        }
+        list.add(t.element);
+        printAllPaths(t.left,list);
+        if(t.left == null && t.right == null){
+            System.out.println(list);
+
+        }
+        printAllPaths(t.right,list);
+        int size = list.size();
+        list.remove(size -1);
+    }
+    private void balanceTree(BinaryNode<E> t){
+        if(t == null){
+            return;
+        }
+        balanceTree(t.right);
+        balanceTree(t.left);
+
+    }
+
     private static class BinaryNode<AnyType> {
         AnyType element;            // The data in the node
         BinaryNode<AnyType> left;   // Left child
